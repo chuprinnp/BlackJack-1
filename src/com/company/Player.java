@@ -5,12 +5,14 @@ package com.company;
  */
 public abstract class Player {
     public Hand hand = new Hand();
+    private Intellect intellect;
 
     public void take(Card current) {
         hand.add(current);
     }
 
     public Command decision() {
-        return intellect.decide();
+        int score = hand.getScore();
+        return intellect.decide(score);
     }
 }
