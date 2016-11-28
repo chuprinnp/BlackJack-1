@@ -8,26 +8,30 @@ public class Main {
     public static void main(String[] args) {
 
         List<Player> players = new LinkedList<>();
-        players.add(new Computer());
-        players.add(new Computer());
-        players.add(new Human());
+        players.add(new Computer("comp1",new LimitIntellect(14)));
+        players.add(new Computer("comp2",new LimitIntellect(20)));
+        players.add(new Human("Human"));
         Dealer dealer = new Dealer();
         players.add(dealer);
 
-        for(Player player: players){
+        for (Player player : players) {
             dealer.deal(player);
             dealer.deal(player);
             System.out.println(player.hand);
         }
 
-        for(Player player: players){
-            while(true){
+        for (Player player : players) {
+            while (true) {
+                System.out.println(player.name+ " "+player.hand.getScore()
+                        +": "+
+                    player.hand);
                 Command command = player.decision();
-                if(command==Command.STAND)
+                if (command == Command.STAND)
                     break;
-                if(command==Command.HIT)
+                if (command == Command.HIT)
                     dealer.deal(player);
             }
 
+        }
     }
 }
